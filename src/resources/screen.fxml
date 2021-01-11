@@ -21,13 +21,13 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="searchBarId" layoutX="15.0" layoutY="100.0"  />
+                  <TextField fx:id="searchBarId" layoutX="15.0" layoutY="100.0" />
                   <Button fx:id="buttonId" layoutX="64.0" layoutY="154.0" mnemonicParsing="false" text="Cauta" />
                </children>
             </Pane>
             <Pane layoutX="180.0" prefHeight="297.0" prefWidth="452.0">
                <children>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="230.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="iconId" fitHeight="94.0" fitWidth="125.0" layoutX="267.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true" />
                   <Label fx:id="cityId" layoutX="263.0" layoutY="38.0" text="City Name">
                      <font>
                         <Font name="System Bold Italic" size="23.0" />
@@ -38,25 +38,25 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <ImageView fitHeight="26.0" fitWidth="41.0" layoutX="14.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="windSpeedIconId" fitHeight="26.0" fitWidth="41.0" layoutX="14.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/windIcon.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="26.0" fitWidth="41.0" layoutX="14.0" layoutY="149.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="windDirectionIconId" fitHeight="26.0" fitWidth="41.0" layoutX="14.0" layoutY="149.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/windDirection.png" />
                      </image>
                   </ImageView>
                   <Label fx:id="windSpeedId" layoutX="107.0" layoutY="105.0" text="windSpeed" />
                   <Label fx:id="windDirectionId" layoutX="107.0" layoutY="153.0" text="windDirection" />
-                  <Label layoutX="131.0" layoutY="29.0" text="C" />
-                  <Label layoutX="17.0" layoutY="208.0" text="pressure" />
+                  <Label fx:id="celsiusId" layoutX="103.0" layoutY="28.0" text="C" />
+                  <Label fx:id="descriptionPressureId" layoutX="17.0" layoutY="208.0" text="pressure" />
                   <Label fx:id="pressureId" layoutX="106.0" layoutY="209.0" text="pressureVal" />
-                  <Label fx:id="descriptionId" layoutX="269.0" layoutY="227.0" text="shortDescription" />
-                  <Label layoutX="189.0" layoutY="105.0" text="m/s" />
-                  <Label layoutX="190.0" layoutY="209.0" text="mm HG" />
-                  <ImageView fitHeight="45.0" fitWidth="26.0" layoutX="14.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
+                  <Label fx:id="descriptionId" alignment="CENTER" layoutX="293.0" layoutY="209.0" text="shortDescription" />
+                  <Label fx:id="windMUId" layoutX="176.0" layoutY="105.0" text="m/s" />
+                  <Label fx:id="pressureMUId" layoutX="177.0" layoutY="209.0" text="mm HG" />
+                  <ImageView fx:id="thermometerId" fitHeight="45.0" fitWidth="26.0" layoutX="14.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/thermometer.png" />
                      </image></ImageView>
@@ -67,6 +67,16 @@
                   <Label fx:id="errorId" layoutX="107.0" layoutY="24.0" prefHeight="36.0" prefWidth="200.0" text="Error ">
                      <font>
                         <Font size="17.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="474.0" layoutY="24.0" text=" Home made with love by:">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="538.0" layoutY="42.0" text="apostolescus">
+                     <font>
+                        <Font name="System Italic" size="11.0" />
                      </font>
                   </Label>
                </children>
