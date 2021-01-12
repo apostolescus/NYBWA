@@ -16,34 +16,58 @@ public class WeatherForecast {
     private static final String APIKEY = "1287bb7b7580eb650b1f63cbdc3ddf4b";
     private static final String getRequest = "https://api.openweathermap.org/data/2.5/weather?q=";
     private WeatherData weatherData;
+    private Logger logger;
+    public String error;
 
-    public void searchCity(String cityName) throws IOException {
+    public WeatherForecast(){
+        logger = new Logger("logFile");
+        error = "";
+    }
+
+    public void searchCity(String cityName)  {
         String finalRequest, inLine;
-        StringBuffer response;
+        StringBuffer response = null;
         int responseCode;
         BufferedReader inBuffer;
         URL url;
         HttpURLConnection connection;
 
         finalRequest = getRequest + cityName + "&appid=" + APIKEY;
-        url = new URL(finalRequest);
-        connection = (HttpURLConnection)url.openConnection();
-        connection.setRequestMethod("GET");
-        responseCode = connection.getResponseCode();
 
-        inBuffer = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-        response = new StringBuffer();
+        try {
+            url = new URL(finalRequest);
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            responseCode = connection.getResponseCode();
+            if(responseCode == HttpURLConnection.HTTP_OK){
+                inBuffer = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                response = new StringBuffer();
 
-        while ((inLine = inBuffer.readLine()) != null) {
-            response.append(inLine);
+                while ((inLine = inBuffer.readLine()) != null) {
+                    response.append(inLine);
+                }
+
+                inBuffer.close();
+                this.error = "";
+            }
+            else{
+                logger.log(null, "Response code was " + responseCode);
+                this.error=" Nu s-a putut gasi orasul.";
+                return;
+            }
+        }
+        catch (IOException e){
+            logger.log(null, "Exception: " + e.getMessage());
+            this.error = "A aparut o eroare. Verifica fisierul de log";
+            return;
         }
 
-        inBuffer.close();
-        processJson(response.toString());
+        processJson(response.toString(), cityName);
+        logger.log(this, null);
 
     }
 
-    private void processJson(String response){
+    private void processJson(String response, String cityName){
         JsonObject jsonObject = new Gson().fromJson(response, JsonObject.class);
         String mainDescription, shortDescription, iconId;
         float temp, windSpeed;
@@ -62,12 +86,17 @@ public class WeatherForecast {
         windDirection = windObj.get("deg").getAsInt();
         iconId = weatherObj.get("icon").getAsString();
 
-        weatherData = new WeatherData(windDirection, pressure, temp, windSpeed, mainDescription, shortDescription, iconId);
+        weatherData = new WeatherData(windDirection, pressure, temp, windSpeed, mainDescription, shortDescription, iconId, cityName);
     }
 
-    public String getWindDirection(){
-        int angle = weatherData.getWindDirection();
-
+    public String getWindDirection(WeatherData wd){
+        int angle;
+        if(wd == null) {
+            angle = weatherData.getWindDirection();
+        }
+        else {
+            angle = wd.getWindDirection();
+        }
         if (angle <10){
             return "N";
         }
@@ -97,22 +126,36 @@ public class WeatherForecast {
         }
         return "None";
     }
-    public float getTemperature(){
-        return (weatherData.getTemperature()-273);
+
+    //weather parameter addded specially for mocking
+    public float getTemperature(WeatherData wd) {
+        if (wd == null) {
+            return (weatherData.getTemperature() - 273);
+        }
+        else{
+            return wd.getTemperature() - 273;
+        }
     }
-    public String getShortDescription(){
-        return weatherData.getBaseType();
+
+    //weather parameter addded specially for mocking
+    public String getLongDescription(WeatherData wd){
+        if(wd == null){
+            return weatherData.getDescription();
+        }
+        else{
+            return wd.getDescription();
+        }
     }
-    public String getLongDescription(){
-        return weatherData.getDescription();
-    }
-    public Float getWindSpeed(){
+
+    public Float getWindSpeed() {
         return weatherData.getWindSpeed();
     }
     public int getAirPressure(){
         return weatherData.getAirPressure();
     }
-
+    public String getCityName(){
+        return weatherData.cityName;
+    }
     public Image getIcon(){
         String iconId = weatherData.getIconId();
         Image img;
@@ -128,4 +171,7 @@ public class WeatherForecast {
         }
         return img;
     }
+
+
+
 }

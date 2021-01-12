@@ -6,11 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseEvent;
-import java.io.IOException;
+
 
 public class Controller {
 
@@ -41,7 +37,7 @@ public class Controller {
             @Override
             public void handle(javafx.scene.input.MouseEvent mouseEvent) {
                 String searchBarVal;
-
+                hideError();
                 searchBarVal = searchBarId.getText();
 
                 if(searchBarVal.equals("")){
@@ -49,21 +45,21 @@ public class Controller {
                     showError();
                 }
                 else{
-                    try {
-                        cityId.setText(searchBarVal);
                         weatherForecast.searchCity(searchBarVal);
-                        tempId.setText(String.valueOf(weatherForecast.getTemperature()));
-                        pressureId.setText(String.valueOf(weatherForecast.getAirPressure()));
-                        windDirectionId.setText(String.valueOf(weatherForecast.getWindDirection()));
-                        windSpeedId.setText(String.valueOf(weatherForecast.getWindSpeed()));
-                        descriptionId.setText(String.valueOf(weatherForecast.getLongDescription()));
-                        iconId.setImage(weatherForecast.getIcon());
-                        showWeather();
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
+                        if(!weatherForecast.error.equals("")){
+                            errorId.setText(weatherForecast.error);
+                            showError();
+                        }
+                        else {
+                            cityId.setText(searchBarVal);
+                            tempId.setText(String.valueOf(weatherForecast.getTemperature(null)));
+                            pressureId.setText(String.valueOf(weatherForecast.getAirPressure()));
+                            windDirectionId.setText(String.valueOf(weatherForecast.getWindDirection(null)));
+                            windSpeedId.setText(String.valueOf(weatherForecast.getWindSpeed()));
+                            descriptionId.setText(String.valueOf(weatherForecast.getLongDescription(null)));
+                            iconId.setImage(weatherForecast.getIcon());
+                            showWeather();
+                        }
                 }
 
             }

@@ -10,8 +10,9 @@ public class WeatherData {
     FloatProperty windSpeed;
     IntegerProperty windDirection, airPressure;
     StringProperty iconId;
+    String cityName;
 
-    public WeatherData(int windDir, int pressure, float temp, float windSpd, String descr, String type, String icon){
+    public WeatherData(int windDir, int pressure, float temp, float windSpd, String descr, String type, String icon, String cityName){
         temperature = new SimpleFloatProperty(temp);
         windSpeed = new SimpleFloatProperty(windSpd);
         windDirection = new SimpleIntegerProperty(windDir);
@@ -19,6 +20,7 @@ public class WeatherData {
         baseType = new SimpleStringProperty(type);
         description = new SimpleStringProperty(descr);
         iconId = new SimpleStringProperty(icon);
+        this.cityName = cityName;
     }
 
     public int getWindDirection(){

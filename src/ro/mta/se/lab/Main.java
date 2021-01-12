@@ -18,14 +18,13 @@ public class Main extends Application {
     public void start(Stage stage) throws IOException {
 
         FXMLLoader loader = new FXMLLoader();
-        URL testurl = this.getClass().getResource("/screen.fxml");
-        if(testurl != null) {
-            loader.setLocation(this.getClass().getResource("/screen.fxml"));
-            loader.setController(new Controller());
-            stage.setScene(new Scene(loader.load()));
-            stage.setTitle("NYBWA");
-            stage.show();
 
-        }
+        loader.setLocation(this.getClass().getResource("/screen.fxml"));
+        loader.setController(new Controller());
+        stage.setScene(new Scene(loader.load()));
+        stage.setTitle("NYBWA");
+        stage.show();
+
     }
+
 }
