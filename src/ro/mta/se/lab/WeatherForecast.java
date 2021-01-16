@@ -1,7 +1,8 @@
 package ro.mta.se.lab;
 
-import com.google.gson.*;
-import javafx.beans.property.IntegerProperty;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import javafx.scene.image.Image;
 
 import java.io.BufferedReader;
@@ -9,14 +10,13 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Map;
 
 public class WeatherForecast {
 
-    private static final String APIKEY = "1287bb7b7580eb650b1f63cbdc3ddf4b";
+        private static final String APIKEY = "YOUR_API_KEY";
     private static final String getRequest = "https://api.openweathermap.org/data/2.5/weather?q=";
     private WeatherData weatherData;
-    private Logger logger;
+    private final Logger logger;
     public String error;
 
     public WeatherForecast(){

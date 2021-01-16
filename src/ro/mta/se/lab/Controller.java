@@ -7,7 +7,6 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 
 
-
 public class Controller {
 
     private WeatherForecast weatherForecast;

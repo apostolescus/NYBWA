@@ -1,7 +1,5 @@
 package ro.mta.se.lab;
 
-import com.sun.javafx.iio.ios.IosDescriptor;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -9,8 +7,6 @@ import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class Logger {
 
@@ -40,11 +36,11 @@ public class Logger {
         String formattedString;
 
         if(weatherForecast == null){
-            formattedString = "[ERROR]: " + java.time.LocalDateTime.now() + " " + error;
+            formattedString =  java.time.LocalDateTime.now() +  " [ERROR]: " + error;
         }
         else {
-            formattedString = "[INFO]: " + java.time.LocalDate.now().toString() + " oraș: " + weatherForecast.getCityName() + " temperatură: " +
-                    weatherForecast.getTemperature(null) + " viteza vântului:" + weatherForecast.getWindSpeed();
+            formattedString =  java.time.LocalDateTime.now().toString() + " [INFO] " + "oraș: " + weatherForecast.getCityName() + " temperatură: " +
+                    weatherForecast.getTemperature(null) + " viteza_vântului: " + weatherForecast.getWindSpeed();
         }
 
         try {
